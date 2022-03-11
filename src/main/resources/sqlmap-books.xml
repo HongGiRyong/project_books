@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.rog//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BooksDaoImpl">
+
+	<select id="list" resultType="books">
+		select * from BOOKS 
+	</select>
+	
+	<insert id="insert" parameterType="books">
+		insert into BOOKS (REGNUM, ISBN, BOOKNAME, WRITER, PUBLISHER, BOOKPRICE, REALFILENAME, BOOKINTRODUCTION)
+		values (BOOKS_SEQ.nextval, #{isbn}, #{bookName}, #{writer}, #{publisher}, #{bookPrice}, #{realFileName}, #{bookIntroduction})
+	</insert>
+	
+	<select id="selectByNum" parameterType="Long" resultType="books">
+		select * from BOOKS where REGNUM = #{regNum} 
+	</select>
+	
+	<select id="selectByKeyword" parameterType="booksSearchCommand" resultType="books">
+		select * from BOOKS	where WRITER like '%'||'${value}'||'%' or BOOKNAME like '%'||'${value}'||'%' or PUBLISHER like '%'||'${value}'||'%' 
+	</select>
+	
+</mapper>
+
+
+
+
+

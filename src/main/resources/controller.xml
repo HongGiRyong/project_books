@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd" >
+	
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
+	</mvc:view-resolvers>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="oracle.jdbc.OracleDriver"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="user" value="tester"></property>
+		<property name="password" value="1234"></property>
+		<property name="maxPoolSize" value="100"></property>
+		<property name="maxIdleTime" value="600"></property>
+		<property name="idleConnectionTestPeriod" value="300"></property>
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:sqlmap-books.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="mainController" class="controller.MainController"/>
+
+	<bean id="registerController" class="controller.RegisterController">
+		<property name="booksRegisterService" ref="booksRegisterService"/>
+		<property name="booksRegisterValidator" ref="booksRegisterValidator"/>
+	</bean>
+	
+	<bean id="booksDaoImpl" class="model.BooksDaoImpl">
+		<constructor-arg ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="booksRegisterService" class="model.BooksRegisterService">
+		<constructor-arg ref="booksDaoImpl"/>
+	</bean>
+	
+	<bean id="listController" class="controller.ListController">
+		<property name="booksDaoImpl" ref="booksDaoImpl"/>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+		 	<list>
+		 		<value>message.label</value>	
+		 	</list>
+		 </property>
+		 <property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+	
+	<bean id="booksRegisterValidator" class="model.BooksRegisterValidator">
+	</bean>
+	
+	<bean id="detailController" class="controller.DetailController">
+		<property name="booksDaoImpl" ref="booksDaoImpl"></property>
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="20000000"/>
+		<property name="maxInMemorySize" value="20000000"/>
+	</bean>
+	
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="c:\\bookImage"/>
+	</bean>
+	
+	<bean id="searchController" class="controller.SearchController">
+		<property name="booksDaoImpl" ref="booksDaoImpl"></property>
+	</bean>
+</beans>
+
+
+
+
