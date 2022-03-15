@@ -26,15 +26,16 @@ public class BooksRegisterService {
 		try {
 		MultipartFile fileName = books.getImageFile();
 		String realFileName = fileName.getOriginalFilename();
-		String storedFileName = UUID.randomUUID().toString().replaceAll("-", "");
+//		String storedFileName = UUID.randomUUID().toString().replaceAll("-", "");
 		
-		String folderPath = "resources/image";
+		String folderPath = "upload";
 		String realPath = request.getServletContext().getRealPath(folderPath);
-		
-		File file = new File(realPath, realFileName);
+		System.out.println("realPath : " + realPath);
+//		File file = new File(realPath, realFileName);
+		File file = new File(realPath);
 
-		fileName.transferTo(file);
-			
+		fileName.transferTo(new File(realPath, realFileName ));
+		
 		newBooks.setBookName(books.getBookName());
 		newBooks.setWriter(books.getWriter());
 		newBooks.setBookPrice(books.getBookPrice());
