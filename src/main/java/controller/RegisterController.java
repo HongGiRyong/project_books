@@ -49,10 +49,16 @@ public class RegisterController {
 		
 		booksRegisterValidator.validate(books, errors);
 		
+		if(errors.hasErrors()) {
+			return "/book_reg_form";
+		}	
+		
+		
 		booksRegisterService.booksRegist(books,request);
 		return "redirect:/list";
 	}
-	
+
+
 }
 
 
