@@ -4,20 +4,20 @@
 
 <mapper namespace="BooksDaoImpl">
 
-	<select id="list" resultType="books">
-		select * from BOOKS 
+	<select id="list" resultType="registerBooks">
+		select * from BOOKS order by REGNUM
 	</select>
 	
-	<insert id="insert" parameterType="books">
+	<insert id="insert" parameterType="registerBooks">
 		insert into BOOKS (REGNUM, ISBN, BOOKNAME, WRITER, PUBLISHER, BOOKPRICE, REALFILENAME, BOOKINTRODUCTION)
 		values (BOOKS_SEQ.nextval, #{isbn}, #{bookName}, #{writer}, #{publisher}, #{bookPrice}, #{realFileName}, #{bookIntroduction})
 	</insert>
 	
-	<select id="selectByNum" parameterType="Long" resultType="books">
+	<select id="selectByNum" parameterType="Long" resultType="registerBooks">
 		select * from BOOKS where REGNUM = #{regNum} 
 	</select>
 	
-	<select id="selectByKeyword" parameterType="booksSearchCommand" resultType="books">
+	<select id="selectByKeyword" parameterType="booksSearchCommand" resultType="registerBooks">
 		select * from BOOKS	where WRITER like '%'||'${value}'||'%' or BOOKNAME like '%'||'${value}'||'%' or PUBLISHER like '%'||'${value}'||'%' 
 	</select>
 	

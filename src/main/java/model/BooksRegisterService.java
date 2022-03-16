@@ -22,20 +22,22 @@ public class BooksRegisterService {
 	}
 	
 	public void booksRegist(Books books, HttpServletRequest request) {
-		Books newBooks = new Books();
+		RegisterBooks newBooks = new RegisterBooks();
 		try {
 		MultipartFile fileName = books.getImageFile();
 		String realFileName = fileName.getOriginalFilename();
 //		String storedFileName = UUID.randomUUID().toString().replaceAll("-", "");
 		
-		String folderPath = "upload";
+		String folderPath = "/resources/image";
 		String realPath = request.getServletContext().getRealPath(folderPath);
 		System.out.println("realPath : " + realPath);
 //		File file = new File(realPath, realFileName);
 		File file = new File(realPath);
-
-		fileName.transferTo(new File(realPath, realFileName ));
-		
+		file.mkdir();
+	
+//		fileName.transferTo(new File(realPath + folderPath +"/" + realFileName ));
+		fileName.transferTo(new File(realPath, realFileName));
+	
 		newBooks.setBookName(books.getBookName());
 		newBooks.setWriter(books.getWriter());
 		newBooks.setBookPrice(books.getBookPrice());
@@ -44,7 +46,7 @@ public class BooksRegisterService {
 		newBooks.setIsbn(books.getIsbn());
 		newBooks.setPublisher(books.getPublisher());
 		
-		booksDaoImpl.insert(newBooks);
+		booksDaoImpl.insert(newBooks); 
 		
 		}catch(Exception e) {
 			e.printStackTrace();

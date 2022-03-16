@@ -4,8 +4,8 @@ import java.util.Collection;
 
 public interface BooksDao {
 	
-	public Collection<Books> listAll();
-	public void insert(Books books);
-	public Books selectByNum(Long num);
-	public Collection<Books> selectByKeyword(BooksSearchCommand booksSearchCommand);	
+	public Collection<RegisterBooks> listAll();
+	public void insert(RegisterBooks registerBooks);
+	public RegisterBooks selectByNum(Long num);
+	public Collection<RegisterBooks> selectByKeyword(BooksSearchCommand booksSearchCommand);	
 }

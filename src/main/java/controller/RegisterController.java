@@ -1,21 +1,12 @@
 package controller;
 
-import java.io.File;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import model.Books;
 import model.BooksRegisterService;
@@ -50,9 +41,9 @@ public class RegisterController {
 		booksRegisterValidator.validate(books, errors);
 		
 		if(errors.hasErrors()) {
+
 			return "/book_reg_form";
 		}	
-		
 		
 		booksRegisterService.booksRegist(books,request);
 		return "redirect:/list";

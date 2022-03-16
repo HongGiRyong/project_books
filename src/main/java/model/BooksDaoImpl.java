@@ -14,23 +14,23 @@ public class BooksDaoImpl implements BooksDao{
 	}
 	
 	@Override
-	public Collection<Books>  listAll() {
+	public Collection<RegisterBooks>  listAll() {
 		return sqlSessionTemplate.selectList("list");
 	}
 	
 	@Override
-	public void insert(Books books) {
-		sqlSessionTemplate.insert("insert", books);
+	public void insert(RegisterBooks registerBooks) {
+		sqlSessionTemplate.insert("insert", registerBooks);
 	}
 	
 	@Override
-	public Books selectByNum(Long num) {
-		List<Books> results = sqlSessionTemplate.selectList("selectByNum", num);
+	public RegisterBooks selectByNum(Long num) {
+		List<RegisterBooks> results = sqlSessionTemplate.selectList("selectByNum", num);
 		return results.isEmpty() ? null : results.get(0);
 	}
 	
 	@Override
-	public Collection<Books> selectByKeyword(BooksSearchCommand booksSearchCommand) {
+	public Collection<RegisterBooks> selectByKeyword(BooksSearchCommand booksSearchCommand) {
 		return sqlSessionTemplate.selectList("selectByKeyword", booksSearchCommand);
 	}
 }

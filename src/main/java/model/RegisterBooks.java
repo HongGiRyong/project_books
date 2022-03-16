@@ -1,8 +1,6 @@
 package model;
 
-import org.springframework.web.multipart.MultipartFile;
-
-public class Books {
+public class RegisterBooks {
 	
 	private Long regNum; 
 	private Long isbn;
@@ -10,7 +8,7 @@ public class Books {
 	private String writer;
 	private String publisher;
 	private Long bookPrice;
-	private MultipartFile imageFile;
+	private String realFileName;
 	private String bookIntroduction;
 	
 	public Long getRegNum() {
@@ -49,11 +47,11 @@ public class Books {
 	public void setBookPrice(Long bookPrice) {
 		this.bookPrice = bookPrice;
 	}
-	public void setImageFile(MultipartFile imageFile) {
-		this.imageFile = imageFile;
+	public String getRealFileName() {
+		return realFileName;
 	}
-	public MultipartFile getImageFile() {
-		return imageFile;
+	public void setRealFileName(String realFileName) {
+		this.realFileName = realFileName;
 	}
 	public String getBookIntroduction() {
 		return bookIntroduction;

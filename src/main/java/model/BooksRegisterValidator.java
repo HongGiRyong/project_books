@@ -19,8 +19,6 @@ public class BooksRegisterValidator implements Validator{
 		ValidationUtils.rejectIfEmpty(errors, "bookIntroduction", "required","필수 항목");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bookPrice", "required","필수 항목");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "isbn", "required","필수 항목");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "realFileName", "required","필수 항목");
-		
-		Books books = (Books)target;
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "imageFile", "required","필수 항목");
 	}
 }

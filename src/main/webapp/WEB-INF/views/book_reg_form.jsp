@@ -40,7 +40,7 @@ function PreviewImage() {
 				<th colspan="3" align="right"><a>*</a>표시는 필수입니다.</th>
 			</tr>
 			<tr>
-				<th rowspan="7" width="33%"><img id="user_image" src="#" alt="" ></th>
+				<th rowspan="7" width="33%"><img id="user_image" src="#" alt="" width="250" ></th>
 			</tr>
 			<tr>
 				<th><a>*</a>BOOK ISBN</th>

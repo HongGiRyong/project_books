@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import model.Books;
 import model.BooksDaoImpl;
+import model.RegisterBooks;
 
 @Controller
 public class DetailController {
@@ -19,7 +20,7 @@ public class DetailController {
 
 	@RequestMapping("/detail/{num}")
 	public String detail(@PathVariable("num") Long num, Model model ) {
-		Books books = booksDaoImpl.selectByNum(num);
+		RegisterBooks books = booksDaoImpl.selectByNum(num);
 		model.addAttribute("books", books);
 		return "book_detail";
 	}

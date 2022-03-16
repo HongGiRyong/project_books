@@ -79,10 +79,6 @@ http://www.springframework.org/schema/tx/spring-tx.xsd" >
 		<property name="maxInMemorySize" value="20000000"/>
 	</bean>
 	
-	<bean id="uploadPath" class="java.lang.String">
-		<constructor-arg value="c:\\bookImage"/>
-	</bean>
-	
 	<bean id="searchController" class="controller.SearchController">
 		<property name="booksDaoImpl" ref="booksDaoImpl"></property>
 	</bean>
